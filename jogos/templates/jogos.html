@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+<style>
+    .box-player2-normal {
+        background-color:green;
+        width:45%;
+        display: inline-block;
+        float:right;
+        border-radius:5px
+    }
+    .box-player1-normal {
+        background-color:green;
+        width:45%;
+        display: inline-block;
+        border-radius:5px
+    }
+
+</style>
+<div class="" style="text-align: center; color:white">
+    <h5 style="display: inline-block;"> Vencedor</h5> <div style="display: inline-block; background-color: green; height:20px; width:20px; margin-right:10px"></div>
+    <h5 style="display: inline-block;"> Perdedor</h5> <div style="display: inline-block; background-color: red; height:20px; width:20px; margin-right:10px"></div>
+</div>
+<br>
+<div class="row">
+    {% for rodada in partidas %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header" style=" background-color: #046091; border-radius:5px">
+                <h5 class=" text-center" style="font-weight: bold; color:white;margin-bottom:0px">{{ rodada.name }}</h5>
+            </div>
+            <div class="card-body" style="padding: 2px">
+                <ul class="list-group" style="color: white">
+                    {% for partida in rodada.partida.all %}
+                    <li class="list-group-item text-center"
+                        style="padding: 2px; border-radius:5px; background-color:#2881b0;">
+                        {% if partida.vencedor == 0 %}
+                        <div class="box-player1-normal"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal"> {{ partida.player2.nick }}</div>
+                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        {% elif partida.vencedor == 1 %}
+                        <div class="box-player1-normal"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal" style="background-color: red"> {{ partida.player2.nick }}</div>
+                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        {% elif partida.vencedor == 2 %}
+                        <div class="box-player1-normal" style="background-color: red"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal"> {{ partida.player2.nick }}</div>
+                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <br>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
