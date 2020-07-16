@@ -25,7 +25,7 @@
 <div class="row">
     {% for rodada in partidas %}
     <div class="col-sm-4">
-        <div class="card">
+        <div class="card animate-hover">
             <div class="card-header" style=" background-color: #046091; border-radius:5px">
                 <h5 class=" text-center" style="font-weight: bold; color:white;margin-bottom:0px">{{ rodada.name }}</h5>
             </div>
@@ -35,16 +35,16 @@
                     <li class="list-group-item text-center"
                         style="padding: 2px; border-radius:5px; background-color:#2881b0;">
                         {% if partida.vencedor == 0 %}
-                        <div class="box-player1-normal"> {{ partida.player1.nick }}</div>
-                        <div class="box-player2-normal"> {{ partida.player2.nick }}</div>
+                        <div class="box-player1-normal animate-hover"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal animate-hover"> {{ partida.player2.nick }}</div>
                         <div style="width:10% ; display: inline-block; float:right; "> X</div>
                         {% elif partida.vencedor == 1 %}
-                        <div class="box-player1-normal"> {{ partida.player1.nick }}</div>
-                        <div class="box-player2-normal" style="background-color: red"> {{ partida.player2.nick }}</div>
+                        <div class="box-player1-normal animate-hover"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal animate-hover" style="background-color: red"> {{ partida.player2.nick }}</div>
                         <div style="width:10% ; display: inline-block; float:right; "> X</div>
                         {% elif partida.vencedor == 2 %}
-                        <div class="box-player1-normal" style="background-color: red"> {{ partida.player1.nick }}</div>
-                        <div class="box-player2-normal"> {{ partida.player2.nick }}</div>
+                        <div class="box-player1-normal animate-hover" style="background-color: red"> {{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal animate-hover"> {{ partida.player2.nick }}</div>
                         <div style="width:10% ; display: inline-block; float:right; "> X</div>
                         {% endif %}
                     </li>

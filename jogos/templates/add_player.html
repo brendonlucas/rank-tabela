@@ -145,43 +145,74 @@ td {
 }
 
 
+
+
+
+
+
+
+
+
+
 </style>
 <div class="container">
-    <table>
-        <thead>
-        <tr >
-            <th></th>
-            <th>Jogador</th>
-            <th>Pontos</th>
-            <th>Vitorias</th>
-        </tr>
-        </thead>
+    <div class="row">
         {% for jogador in jogadores %}
-        <tbody>
-        <tr class="animate-hover">
-            <th style="text-align:center;"> {{ forloop.counter }}</th>
-            {% if forloop.counter <= 2 %}
-            <td style="background-color: lightgreen"> {{ jogador.nick}}</td>
-            <td style="background-color: lightgreen">{{ jogador.pontos }}</td>
-            <td style="background-color: lightgreen">{{ jogador.vitorias }}</td>
+        <div class="col-sm-3">
+            <div class="card animate-hover">
+                <div class="card-header" style=" background-color: #046091; border-radius:5px">
+                    <h5 class=" text-center" style="font-weight: bold; color:white;margin-bottom:0px">Jogador {{ forloop.counter }}</h5>
+                </div>
+                <div class="card-body" style="padding: 2px; text-align:center">
+                    <h3>{{ jogador.nick }}</h3>
+                    <button class="btn btn-lg btn-warning" type="button" data-toggle="modal"
+                            data-target="#{{ jogador.nick }}">Editar nome
+                    </button>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="modal fade" id="{{ jogador.nick }}" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p> Editar o nome do jogador {{ jogador.nick }}</p>
 
-            {% elif forloop.counter >= 9%}
-            <td style="background-color: #fa776e"> {{ jogador.nick}}</td>
-            <td style="background-color: #fa776e">{{ jogador.pontos }}</td>
-            <td style="background-color: #fa776e">{{ jogador.vitorias }}</td>
+                        <form action="jogador/{{jogador.id}}/mudar_nome/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
+                                       placeholder="Jogador" name="nome" required>
+                            </div>
 
-            {% else %}
-            <td> {{ jogador.nick}}</td>
-            <td>{{ jogador.pontos }}</td>
-            <td>{{ jogador.vitorias }}</td>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger"
+                                        id="delete">Confirmar
+                                </button>
+                                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
 
 
-            {% endif %}
-
-        </tr>
-        </tbody>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </table>
+    </div>
+
+
+    <!--
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nome">Jogador</label>
+            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
+                   placeholder="Jogador" name="nome" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+    -->
 </div>
 
 

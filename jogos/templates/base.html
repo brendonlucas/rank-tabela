@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt">
+<style>
+    .animate-hover {
+            position: relative;
+            top: 0;
+            transition: all .2s ease-in-out
+        }
+
+        .animate-hover:hover {
+            top: -9px;
+            box-shadow: 0 4px 3px #999
+        }
+
+
+
+
+
+
+</style>
 <head>
     <title>Copa Pokemon</title>
     <meta charset="utf-8">
@@ -16,24 +34,44 @@
 <body style="background-color:#137db0">
 <header>
     <div style="text-align: center">
-        <img class="img-fluid" src="https://fontmeme.com/permalink/200703/48ee12d5bd2dd1cb4dc31a28c93bbe25.png" alt="fonte-de-pokemon-go" border="0">
+        <img class="img-fluid" src="https://fontmeme.com/permalink/200703/48ee12d5bd2dd1cb4dc31a28c93bbe25.png"
+             alt="fonte-de-pokemon-go" border="0">
     </div>
     <div>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{% url '' %}">Jogos </a>
-                <a class="nav-item nav-link" href="{% url 'classificacao' %}">Classificação</a>
+        <nav class="navbar navbar-expand navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="{% url '' %}">Jogos </a>
+                    <a class="nav-item nav-link" href="{% url 'classificacao' %}">Classificação</a>
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'ver_jogadores' %}">Jogadores</a>
+                    {% endif %}
+                </div>
+
+                <div class="navbar-nav ml-auto">
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
 </header>
+
+
 <br>
 <div class="container-fluid">
     {% block 'content' %}
     {% endblock %}
 </div>
+<br>
+<br>
+<br>
+<footer style="background-color:#046091; height:100px">
+
+</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
