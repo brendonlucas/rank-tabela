@@ -15,11 +15,30 @@
         display: inline-block;
         border-radius:5px
     }
+    .btn-transparent{
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+    }
+
+
+
+
+
+
+
+
+
+
 
 </style>
 <div class="" style="text-align: center; color:white">
-    <h5 style="display: inline-block;"> Vencedor</h5> <div style="display: inline-block; background-color: green; height:20px; width:20px; margin-right:10px"></div>
-    <h5 style="display: inline-block;"> Perdedor</h5> <div style="display: inline-block; background-color: red; height:20px; width:20px; margin-right:10px"></div>
+    <h5 style="display: inline-block;"> Vencedor</h5>
+    <div style="display: inline-block; background-color: green; height:20px; width:20px; margin-right:10px"></div>
+    <h5 style="display: inline-block;"> Perdedor</h5>
+    <div style="display: inline-block; background-color: red; height:20px; width:20px; margin-right:10px"></div>
 </div>
 <br>
 <div class="row">
@@ -37,18 +56,56 @@
                         {% if partida.vencedor == 0 %}
                         <div class="box-player1-normal animate-hover"> {{ partida.player1.nick }}</div>
                         <div class="box-player2-normal animate-hover"> {{ partida.player2.nick }}</div>
-                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        <div style="width:10% ; display: inline-block; float:right; ">
+                            <button class="btn-transparent" type="button" data-toggle="modal"
+                                    data-target="#p{{partida.id}}"> X
+                            </button>
+                        </div>
                         {% elif partida.vencedor == 1 %}
-                        <div class="box-player1-normal animate-hover"> {{ partida.player1.nick }}</div>
-                        <div class="box-player2-normal animate-hover" style="background-color: red"> {{ partida.player2.nick }}</div>
-                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        <div class="box-player1-normal animate-hover">{{ partida.player1.nick }}</div>
+                        <div class="box-player2-normal animate-hover" style="background-color: red">{{ partida.player2.nick }}
+
+                        </div>
+                        <div style="width:10% ; display: inline-block; float:right; ">
+                            <button class="btn-transparent" type="button" data-toggle="modal"
+                                    data-target="#p{{partida.id}}"> X
+                            </button>
+                        </div>
+
                         {% elif partida.vencedor == 2 %}
-                        <div class="box-player1-normal animate-hover" style="background-color: red"> {{ partida.player1.nick }}</div>
+                        <div class="box-player1-normal animate-hover" style="background-color: red">{{partida.player1.nick}} </div>
                         <div class="box-player2-normal animate-hover"> {{ partida.player2.nick }}</div>
-                        <div style="width:10% ; display: inline-block; float:right; "> X</div>
+                        <div style="width:10% ; display: inline-block; float:right; ">
+                            <button class="btn-transparent" type="button" data-toggle="modal"
+                                    data-target="#p{{partida.id}}"> X
+                            </button>
+                        </div>
+                        {% endif %}
+                    {% if current_user.is_authenticated %}
+                        <div class="modal fade" id="p{{partida.id}}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h5 style="color:black"> Declarar Vencedor </h5>
+                                        <br>
+                                        <a class="btn btn-success" href="{% url 'resultado_partida' partida.id 1 %}"> {{ partida.player1.nick }}</a>
+                                        <span style="color:black"> X </span>
+                                        <a class="btn btn-success" href="{% url 'resultado_partida' partida.id 2 %}"> {{ partida.player2.nick }}</a>
+                                        <br><br>
+                                        <div class="modal-footer">
+                                            <button type="button" data-dismiss="modal" class="btn btn-warning">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% endif %}
                     </li>
+
                     {% endfor %}
+
                 </ul>
             </div>
         </div>
@@ -56,4 +113,6 @@
     </div>
     {% endfor %}
 </div>
+
+
 {% endblock %}

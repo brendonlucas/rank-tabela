@@ -19,3 +19,4 @@ class Partida(models.Model):
     vencedor = models.IntegerField(default=0)
 
 
+
