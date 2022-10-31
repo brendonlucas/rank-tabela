@@ -118,3 +118,4 @@ LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 STATIC_ROOT = "/copa_pokemon/static/"
+MEDIA_ROOT = "/copa_pokemon/media/"
