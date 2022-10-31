@@ -28,6 +28,7 @@ def ver_jogadores(request):
 
 
 def ver_classificacao(request):
+    print(get_user_logado(request))
     #jogadores = Jogador.objects.all().order_by(Lower('nick').asc())
 
     jogadores = Jogador.objects.all().order_by('-pontos')
