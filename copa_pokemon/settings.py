@@ -112,10 +112,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static", '/var/www/static/',
+]
+
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 
-STATIC_ROOT = "/copa_pokemon/static/"
-MEDIA_ROOT = "/copa_pokemon/media/"
+# STATIC_ROOT = "/copa_pokemon/static/"
+STATIC_ROOT = "var/www/brendonlulucas/static"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media/')
